@@ -1,0 +1,158 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.MainPage"
+             BackgroundColor="#34495E"
+             Title="Web Crawler">
+
+    <ContentPage.Resources>
+        <!-- سبک‌ها و منابع مشترک -->
+        <Style TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#E74C3C" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="CornerRadius" Value="20" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="HeightRequest" Value="50" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Margin" Value="0,20,0,0" />
+            <Setter Property="Shadow">
+                <Setter.Value>
+                    <Shadow Brush="#000000" Opacity="0.4" Offset="5,5" />
+                </Setter.Value>
+            </Setter>
+
+            <!-- انیمیشن‌های دکمه‌ها -->
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="PointerOver">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="#C0392B" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="#A93226" />
+                                <Setter Property="Scale" Value="0.95" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Frame">
+            <Setter Property="CornerRadius" Value="20" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="HasShadow" Value="True" />
+            <Setter Property="BackgroundColor" Value="#F9E795" />
+            <Setter Property="Shadow">
+                <Setter.Value>
+                    <Shadow Brush="#000000" Opacity="0.3" Offset="3,3" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,20,0,0" />
+        </Style>
+
+        <Style TargetType="Entry">
+            <Setter Property="BackgroundColor" Value="#F96167" />
+            <Setter Property="TextColor" Value="#2C3E50" />
+            <Setter Property="PlaceholderColor" Value="#BDC3C7" />
+            <Setter Property="HeightRequest" Value="50" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Margin" Value="0,10,0,0" />
+
+            <!-- افکت Hover -->
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="#F1C40F" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="PointerOver">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="#F1C40F" />
+                                <Setter Property="Scale" Value="1.05" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Editor">
+            <Setter Property="BackgroundColor" Value="#F96167" />
+            <Setter Property="TextColor" Value="#2C3E50" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Margin" Value="0,20,0,0" />
+            <Setter Property="HeightRequest" Value="200" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20">
+            <Label Text="Web Crawler" FontSize="36" FontAttributes="Bold" HorizontalOptions="Center" />
+            <!-- Entry برای وارد کردن URL یا کلمات کلیدی -->
+            <Frame>
+                <Entry x:Name="urlEntry" Placeholder="Enter URL or Keyword" Margin="10,20,10,20" />
+            </Frame>
+            
+            <!-- Picker برای انتخاب نوع اطلاعات -->
+            
+            <Picker x:Name="dataTypePicker" 
+                    Title="Select Data Type"
+                    Margin="10,20,10,20"
+                    
+                    SelectedIndexChanged="OnPickerSelectedIndexChanged">
+                <Picker.Items>
+                    <x:String>Images</x:String>
+                    <x:String>Links</x:String>
+                    <!--<x:String>Text</x:String>-->
+                </Picker.Items>
+            </Picker>
+            
+
+            <!-- Button برای شروع Crawling -->
+            <StackLayout x:Name="crawlButtonContainer" Margin="0,20,0,0">
+                <Button x:Name="crawlButton" Text="Start Crawling" Clicked="OnScrapeClicked" />
+                <ActivityIndicator x:Name="loadingIndicator" IsRunning="False" IsVisible="False" Color="#2ECC71" />
+            </StackLayout>
+
+            <!-- Label برای نمایش داده‌های Crawled -->
+            <Label Text="Crawled Data:" Margin="0,20,0,0" />
+            <HorizontalStackLayout Margin="0,20,0,0">
+                <Button Text="Headers" Clicked="OnHeadersClicked" BackgroundColor="#95a5a6" />
+                <Button Text="Body" Clicked="OnBodyClicked" BackgroundColor="#95a5a6" />
+                <Button x:Name="PickerSelectedWhatData" Text="" Clicked="OnDataClicked" BackgroundColor="#CADCFC" />
+            </HorizontalStackLayout>
+            <!-- Editor برای نمایش داده‌های Crawled -->
+            <Frame>
+                <Editor x:Name="resultEditor" IsReadOnly="True" />
+            </Frame>
+
+            <!-- دکمه‌های Clear و Copy -->
+            <HorizontalStackLayout Margin="0,20,0,0" Spacing="10">
+                <Button Text="Clear" Clicked="OnClearClicked" BackgroundColor="#3498DB" />
+                <Button Text="Copy" Clicked="OnCopyClicked" BackgroundColor="#2ECC71" />
+            </HorizontalStackLayout>
+            <VerticalStackLayout x:Name="imageContainer" Spacing="10">
+                <!-- تصاویر به اینجا اضافه خواهند شد -->
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+        
+            
+        
+
+    </ScrollView>
+
+
+</ContentPage>

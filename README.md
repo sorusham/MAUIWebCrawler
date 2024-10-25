@@ -22,7 +22,7 @@
 <p>To set up the project on your local machine:</p>
 <pre>
 <code>
-git clone https://github.com/username/repository-name.git
+git clone https://github.com/SorushPro/MAUIWebCrawler.git
 cd repository-name
 </code>
 </pre>
@@ -68,5 +68,4 @@ Links Found:
 <h2>License</h2>
 <p>This project is open-source and distributed under the MIT License. See the <a href="LICENSE">LICENSE</a> file for more details.</p>
 
-<h2>Contact</h2>
-<p>For questions or support, please contact <a href="mailto:your.email@example.com">your.email@example.com</a>.</p>
+

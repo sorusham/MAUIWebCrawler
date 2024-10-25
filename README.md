@@ -55,15 +55,6 @@ Links Found:
 </code>
 </pre>
 
-<h2>Contributing</h2>
-<p>Contributions are welcome! To contribute:</p>
-<ol>
-    <li>Fork the repository.</li>
-    <li>Create a new branch (<code>git checkout -b feature-branch</code>).</li>
-    <li>Commit your changes (<code>git commit -m "Add new feature"</code>).</li>
-    <li>Push to the branch (<code>git push origin feature-branch</code>).</li>
-    <li>Open a Pull Request.</li>
-</ol>
 
 <h2>License</h2>
 <p>This project is open-source and distributed under the MIT License. See the <a href="LICENSE">LICENSE</a> file for more details.</p>

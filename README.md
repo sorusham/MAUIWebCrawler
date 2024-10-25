@@ -23,7 +23,7 @@
 <pre>
 <code>
 git clone https://github.com/SorushPro/MAUIWebCrawler.git
-cd repository-name
+cd MAUIWebCrawler
 </code>
 </pre>
 <p>Then, run the crawler:</p>

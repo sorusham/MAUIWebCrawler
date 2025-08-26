@@ -57,6 +57,6 @@ Links Found:
 
 
 <h2>License</h2>
-<p>This project is open-source and distributed under the MIT License. See the <a href="LICENSE">LICENSE</a> file for more details.</p>
+<p>This project is open-source and distributed under the Apache License. See the <a href="LICENSE">LICENSE</a> file for more details.</p>
 
 
